@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, Moon, Palette, SunMoon, Sun } from "lucide-react";
+import { Check, Moon, SunMoon, Sun } from "lucide-react";
 
 import { useTheme } from "@/hooks/use-theme";
 import { MODES, THEMES, type Mode, type ThemeId } from "@/lib/themes";
@@ -53,26 +53,27 @@ export function AppearancePanel() {
         </div>
       </div>
 
-      <div className="mt-8 space-y-4">
-        <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground">
-          <Palette className="size-4 text-muted-foreground" />
-          {t("accentColor")}
-        </h3>
+      {THEMES.length > 1 && (
+        <div className="mt-8 space-y-4">
+          <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground">
+            {t("accentColor")}
+          </h3>
 
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {THEMES.map((tObj) => (
-            <ThemeCard
-              key={tObj.id}
-              id={tObj.id}
-              name={tObj.name}
-              tagline={tObj.tagline}
-              swatch={tObj.swatch}
-              isActive={tObj.id === theme}
-              onPick={() => setTheme(tObj.id)}
-            />
-          ))}
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {THEMES.map((tObj) => (
+              <ThemeCard
+                key={tObj.id}
+                id={tObj.id}
+                name={tObj.name}
+                tagline={tObj.tagline}
+                swatch={tObj.swatch}
+                isActive={tObj.id === theme}
+                onPick={() => setTheme(tObj.id)}
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </section>
   );
 }
